@@ -2,7 +2,7 @@ var cardsContainer = document.querySelector("#cards-container");
 var currentUserName = "";
 
 function getUserName(element) {
-  //   console.log(element.value);
+    console.log(element.value);
   currentUserName = element.value;
 }
 
@@ -19,13 +19,15 @@ function makeCoderCard(data) {
   return card;
 }
 
-async function search() {
+async function search(event) {
+  event.preventDefault()
+  console.log("searching...");
   var response = await fetch(
     "https://api.github.com/users/" + currentUserName + "/followers"
   );
   var coderFollowers = await response.json();
 
-  console.log(coderFollowers);
+  // console.log(coderFollowers);
 
   var followersArray = [];
 
@@ -42,5 +44,5 @@ async function search() {
       makeCoderCard(coderData) + cardsContainer.innerHTML;
   }
 
-  console.log(followersArray);
+  // console.log(followersArray);
 }
